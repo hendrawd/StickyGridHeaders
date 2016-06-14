@@ -190,8 +190,19 @@ public class StickyGridHeadersBaseAdapterWrapper extends BaseAdapter {
         } else if (adapterPosition.mPosition == POSITION_FILLER) {
             convertView = getFillerView(convertView, parent, mLastViewSeen);
         } else {
-            convertView = mDelegate.getView(adapterPosition.mPosition, convertView, parent);
-            mLastViewSeen = convertView;
+            //FIXME this problematic code sometimes throw
+            //Fatal Exception: java.lang.NullPointerException
+            //Attempt to write to null array
+            //other trigger from stack trace is
+            //com.tonicartos.widget.stickygridheaders.StickyGridHeadersGridView.onTouchEvent (StickyGridHeadersGridView.java:344)
+            //current guest is because the item or adapter isn't ready yet or because other method change the item at the same time
+            //to avoid any crash, for now we just need to catch the exception
+            try {
+                convertView = mDelegate.getView(adapterPosition.mPosition, convertView, parent);
+                mLastViewSeen = convertView;
+            } catch (NullPointerException npe) {
+
+            }
         }
 
         return convertView;
