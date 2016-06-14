@@ -1,3 +1,5 @@
+# This project was abandoned by it's author, so i decide to continue this project on my own to fix some problems and implement features that i want.
+
 # StickyGridHeaders
 ## Replacement project at [SuperSLiM](https://github.com/TonicArtos/SuperSLiM)
 **This repository is abandoned and will no longer see any development or support.**
